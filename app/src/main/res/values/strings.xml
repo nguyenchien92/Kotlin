@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">FakeApp</string>
+    <string name="frag_login_ed_email" translatable="false">Email</string>
+    <string name="frag_login_ed_pass_word" translatable="false">Mật khẩu</string>
+    <string name="frag_login_text_forgot_pass_word">Quên mật khẩu?</string>
+    <string name="frag_login_text_sign_in_google">Đăng nhập bằng Google</string>
+    <string name="frag_login_text_sign_in_fb">Đăng nhập bằng Facebook</string>
+    <string name="frag_login_text_sign_up">Đăng ký</string>
+    <string name="frag_login_text_sign_in">Đăng nhập</string>
 </resources>
