@@ -1,22 +1,20 @@
 package com.example.nguyen.fakeapp.viewmodels
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.nguyen.fakeapp.models.LoginInfo
 import com.example.nguyen.fakeapp.models.LoginInfoRepo
 
 class LoginViewModel : ViewModel() {
-    private var dataLogin : MutableLiveData<LoginInfo> ?= null
-    private var repo:LoginInfoRepo ?=null
+    private var repo: LoginInfoRepo? = LoginInfoRepo.getInstance()
 
-    fun getData(email:String,password:String):MutableLiveData<LoginInfo>?{
-        queryRepo(email,password)
-        return dataLogin
+    fun getData(): MutableLiveData<LoginInfo>? {
+
+        return repo?.loginData;
     }
 
-    private fun queryRepo(email:String,password:String) {
-        repo = LoginInfoRepo.getInstance()
-
-        dataLogin = repo?.getDataLogin(email, password)
+    fun queryRepo(email: String, password: String) {
+        repo?.checkLogin(email, password)
     }
 }

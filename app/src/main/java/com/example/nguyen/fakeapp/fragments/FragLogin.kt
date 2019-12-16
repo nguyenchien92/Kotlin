@@ -18,11 +18,11 @@ import com.example.nguyen.fakeapp.models.LoginInfo
 
 class FragLogin : Fragment() {
 
-    var edMail: EditText? = null
-    var edPass: EditText? = null
-    var tvSignIn: TextView? = null
-    var tvSignUp: TextView? = null
-    var mDataViewModel: LoginViewModel? = null
+    private var edMail: EditText? = null
+    private var edPass: EditText? = null
+    private var tvSignIn: TextView? = null
+    private var tvSignUp: TextView? = null
+    private var mDataViewModel: LoginViewModel? = null
 
     private var rootView: View? = null
 
@@ -35,26 +35,46 @@ class FragLogin : Fragment() {
         rootView = inflater.inflate(R.layout.login_frag, container, false)
 
         init()
-        tvSignIn?.setOnClickListener { signInEvent() }
+        setEventClick()
+        mDataViewModel = ViewModelProviders.of(this)
+            .get(LoginViewModel::class.java)
+
+        mDataViewModel?.getData()?.observe(this,
+            Observer<LoginInfo> { t ->
+                Toast.makeText(context, "${t?.message}", Toast.LENGTH_SHORT).show()
+            })
 
         return rootView
     }
 
-    private fun signInEvent() {
-        getData()
+
+    private fun setEventClick() {
+
+        tvSignUp?.setOnClickListener { signUp() }
+
+        tvSignIn?.setOnClickListener { signIn() }
     }
 
-    private fun getData() {
+    private fun signUp() {
+        Toast.makeText(context, tvSignUp?.text.toString(), Toast.LENGTH_SHORT).show()
+    }
+
+    private fun signIn() {
+        checkLogin()
+    }
+
+    private fun checkLogin() {
+
+        var email = edMail?.text.toString()
+        var pass = edPass?.text.toString()
+
+        getDataLogin(email, pass)
+    }
 
 
-        mDataViewModel = ViewModelProviders.of(this)
-            .get(LoginViewModel::class.java)
+    private fun getDataLogin(email: String, pass: String) {
+        mDataViewModel?.queryRepo(email, pass)
 
-        mDataViewModel?.getData(edMail?.text.toString(),edPass?.text.toString())?.observe(this, object : Observer<LoginInfo> {
-            override fun onChanged(t: LoginInfo?) {
-                Toast.makeText(context,t?.data?.email,Toast.LENGTH_LONG).show()
-            }
-        })
     }
 
     private fun init() {
@@ -63,8 +83,6 @@ class FragLogin : Fragment() {
 
         tvSignIn = rootView?.findViewById(R.id.tv_sign_in)
         tvSignUp = rootView?.findViewById(R.id.tv_sign_up)
-
-
 
     }
 
