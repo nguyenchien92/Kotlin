@@ -14,9 +14,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 
-class LoginInfoRepo {
+class LoginInfoRepo private constructor(){
 
-    val loginData: MutableLiveData<LoginInfo> = MutableLiveData()
+    var loginData: MutableLiveData<LoginInfo> = MutableLiveData()
 
     companion object {
         var loginInstance: LoginInfoRepo? = null
@@ -28,19 +28,10 @@ class LoginInfoRepo {
         }
     }
 
-    fun getInstance(): LoginInfoRepo? {
-        if (loginInstance == null)
-            loginInstance = LoginInfoRepo()
-
-        return loginInstance
-    }
-
 
     fun checkLogin(email: String, password: String) {
         var client: ApiService = ControllerApi.getClient().create(ApiService::class.java)
         var call = client.getDataLogin(email, password)
-
-//        val result = MutableLiveData<LoginInfo>()
 
         call.enqueue(object : Callback<LoginInfo> {
             override fun onFailure(call: Call<LoginInfo>, t: Throwable) {
@@ -58,26 +49,6 @@ class LoginInfoRepo {
         })
     }
 
-//    private fun getData( email: String, password: String) {
-//
-//        var client: ApiService = ControllerApi.getClient().create(ApiService::class.java)
-//        var call = client.getDataLogin(email, password)
-//
-//        call.enqueue(object : Callback<LoginInfo> {
-//            override fun onFailure(call: Call<LoginInfo>, t: Throwable) {
-//                Log.d("Fail", "${t.localizedMessage}")
-//            }
-//
-//            override fun onResponse(call: Call<LoginInfo>, response: Response<LoginInfo>) {
-//
-//                var code = response.code()
-//                when (code) {
-//                    404 -> errorData(response)
-//                    200 -> resultData(response)
-//                }
-//            }
-//        })
-//    }
 
     private fun errorData(response: Response<LoginInfo>) {
         var gson = Gson()
