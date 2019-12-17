@@ -1,43 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <ImageView android:layout_height="100dp"
+    <ImageView
         android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/all_image_logo"
-        android:layout_marginTop="100dp"/>
+        android:layout_marginTop="100dp"
+        android:src="@drawable/all_image_logo" />
 
 
-    <EditText
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/ed_mail"
-        android:drawableStart="@drawable/frag_login_icon_email"
-        android:hint="@string/frag_login_ed_email"
-        android:layout_marginStart="10dp"
-        android:singleLine="true" />
-    <EditText
-        android:layout_marginTop="10dp"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/ed_pass_word"
-        android:inputType="textPassword"
-        android:drawableStart="@drawable/frag_login_icon_pass_word"
-        android:hint="@string/frag_login_ed_pass_word"
-        android:layout_marginStart="10dp"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="50dp"
+        android:paddingEnd="50dp"
+        android:layout_marginTop="30dp">
+
+        <EditText
+            android:id="@+id/ed_mail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:hint="@string/all_ed_email"
+            android:singleLine="true"
+            android:paddingStart="50dp"/>
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/icon_login"
+            android:layout_gravity="center_vertical"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="50dp"
+        android:paddingEnd="50dp">
+
+        <EditText
+            android:id="@+id/ed_pass_word"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:hint="@string/all_ed_pass_word"
+            android:inputType="textPassword"
+            android:paddingStart="50dp"/>
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/icon_pass_word"
+            android:layout_gravity="center_vertical"/>
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
+            android:id="@+id/tv_sign_up"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
@@ -45,24 +71,23 @@
             android:background="@drawable/all_border_text_view"
             android:gravity="center"
             android:padding="10dp"
-            android:text="@string/frag_login_text_sign_up"
+            android:text="@string/all_text_sign_up"
             android:textColor="#EA485F"
-            android:textSize="19dp"
-            android:id="@+id/tv_sign_up" />
+            android:textSize="19dp" />
 
         <TextView
+            android:id="@+id/tv_sign_in"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_marginLeft="50dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/all_border_text_view"
+            android:backgroundTint="#EA485F"
             android:gravity="center"
             android:padding="10dp"
             android:text="@string/frag_login_text_sign_in"
             android:textColor="#F0E9EB"
-            android:textSize="19dp"
-            android:id="@+id/tv_sign_in"
-            android:backgroundTint="#EA485F"/>
+            android:textSize="19dp" />
     </LinearLayout>
 
     <TextView
@@ -80,23 +105,24 @@
         android:textSize="20dp" />
 
     <TextView
+        android:id="@+id/sign_in_google"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:text="@string/frag_login_text_sign_in_google"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:textSize="20dp"
-        android:textColor="#EA485F"
         android:background="@drawable/all_border_text_view"
-        android:gravity="center"
         android:backgroundTint="#E2E2E2"
         android:drawableLeft="@drawable/all_icon_google"
-        android:id="@+id/sign_in_google"/>
+        android:gravity="center"
+        android:text="@string/frag_login_text_sign_in_google"
+        android:textColor="#EA485F"
+        android:textSize="20dp" />
+
     <TextView
+        android:id="@+id/tv_forgot_pass_word"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_forgot_pass_word"
-        android:text="@string/frag_login_text_forgot_pass_word"
+        android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:layout_gravity="center"/>
+        android:text="@string/frag_login_text_forgot_pass_word" />
 </LinearLayout>

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import androidx.core.content.ContextCompat.startActivity
+import androidx.fragment.app.FragmentManager
 import com.example.nguyen.fakeapp.utils.MoveTo
 import java.lang.Thread.sleep
 
@@ -17,7 +18,7 @@ class SplashActivity : AppCompatActivity(), MoveTo {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splass_activity)
 
-        move()
+        move(supportFragmentManager)
     }
 
 
@@ -32,7 +33,7 @@ class SplashActivity : AppCompatActivity(), MoveTo {
         thread.start()
     }
 
-    override fun move() {
+    override fun move(manager: FragmentManager) {
         waiting()
     }
 }

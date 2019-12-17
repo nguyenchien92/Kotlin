@@ -9,14 +9,16 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import com.example.nguyen.fakeapp.R
 import com.example.nguyen.fakeapp.viewmodels.LoginViewModel
 import androidx.lifecycle.ViewModelProviders
 import com.example.nguyen.fakeapp.models.LoginInfo
+import com.example.nguyen.fakeapp.utils.MoveTo
 
 
-class FragLogin : Fragment() {
+class FragLogin : Fragment(),MoveTo {
 
     private var edMail: EditText? = null
     private var edPass: EditText? = null
@@ -56,7 +58,7 @@ class FragLogin : Fragment() {
     }
 
     private fun signUp() {
-        Toast.makeText(context, tvSignUp?.text.toString(), Toast.LENGTH_SHORT).show()
+       move(fragmentManager!!)
     }
 
     private fun signIn() {
@@ -84,6 +86,13 @@ class FragLogin : Fragment() {
         tvSignIn = rootView?.findViewById(R.id.tv_sign_in)
         tvSignUp = rootView?.findViewById(R.id.tv_sign_up)
 
+    }
+
+    override fun move(manager: FragmentManager) {
+        var transaction = manager.beginTransaction()
+        transaction.replace(R.id.frame_layout_activity,FragSignUp(),FragSignUp::class.java.simpleName)
+        transaction.addToBackStack(FragSignUp::class.java.simpleName)
+        transaction.commit()
     }
 
 

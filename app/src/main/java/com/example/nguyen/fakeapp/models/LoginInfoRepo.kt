@@ -16,10 +16,11 @@ import retrofit2.Retrofit
 
 class LoginInfoRepo private constructor(){
 
-    var loginData: MutableLiveData<LoginInfo> = MutableLiveData()
+//    var loginData: MutableLiveData<LoginInfo> = MutableLiveData()
 
     companion object {
         var loginInstance: LoginInfoRepo? = null
+        val loginData: MutableLiveData<LoginInfo> = MutableLiveData()
         fun getInstance(): LoginInfoRepo? {
             if (loginInstance == null)
                 loginInstance = LoginInfoRepo()
@@ -42,8 +43,8 @@ class LoginInfoRepo private constructor(){
 
                 var code = response.code()
                 when (code) {
-                    404 -> errorData(response)
-                    200 -> resultData(response)
+                    EnumCode.ERROR.number -> errorData(response)
+                    EnumCode.SUCCESS.number -> resultData(response)
                 }
             }
         })

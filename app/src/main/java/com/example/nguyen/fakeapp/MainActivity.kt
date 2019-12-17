@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() ,MoveTo{
         setContentView(R.layout.activity_main)
 
         init()
-        move()
+        move(supportFragmentManager)
     }
 
     private fun init()
@@ -23,8 +23,8 @@ class MainActivity : AppCompatActivity() ,MoveTo{
         frameMain = findViewById(R.id.frame_layout_activity)
     }
 
-    override fun move() {
-        var manager:FragmentManager = supportFragmentManager
+    override fun move(manager: FragmentManager) {
+        
         var transaction = manager.beginTransaction()
         transaction.replace(R.id.frame_layout_activity,FragLogin(),FragLogin::class.java.simpleName)
         transaction.commit()

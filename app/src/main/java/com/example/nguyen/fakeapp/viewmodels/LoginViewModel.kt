@@ -11,7 +11,7 @@ class LoginViewModel : ViewModel() {
 
     fun getData(): MutableLiveData<LoginInfo>? {
 
-        return repo?.loginData
+        return LoginInfoRepo.loginData
     }
 
     fun queryRepo(email: String, password: String) {
