@@ -1,5 +1,6 @@
 package com.example.nguyen.fakeapp.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,14 +19,14 @@ import com.example.nguyen.fakeapp.models.LoginInfo
 import com.example.nguyen.fakeapp.utils.MoveTo
 
 
-class FragLogin : Fragment(),MoveTo {
+class FragLogin : Fragment(), MoveTo {
 
     private var edMail: EditText? = null
     private var edPass: EditText? = null
     private var tvSignIn: TextView? = null
     private var tvSignUp: TextView? = null
     private var mDataViewModel: LoginViewModel? = null
-
+    private var tvForgotPass: TextView? = null
     private var rootView: View? = null
 
     override fun onCreateView(
@@ -38,13 +39,7 @@ class FragLogin : Fragment(),MoveTo {
 
         init()
         setEventClick()
-        mDataViewModel = ViewModelProviders.of(this)
-            .get(LoginViewModel::class.java)
 
-        mDataViewModel?.getData()?.observe(this,
-            Observer<LoginInfo> { t ->
-                Toast.makeText(context, "${t?.message}", Toast.LENGTH_SHORT).show()
-            })
 
         return rootView
     }
@@ -52,13 +47,28 @@ class FragLogin : Fragment(),MoveTo {
 
     private fun setEventClick() {
 
-        tvSignUp?.setOnClickListener { signUp() }
+        tvSignUp?.setOnClickListener {
+            signUp()
+        }
 
         tvSignIn?.setOnClickListener { signIn() }
+
+        tvForgotPass?.setOnClickListener(recoverPass())
+    }
+
+    private fun recoverPass() = View.OnClickListener {
+        var transaction = fragmentManager?.beginTransaction()
+        transaction?.replace(
+            R.id.frame_layout_activity,
+            FragRecoverPassWord(),
+            FragRecoverPassWord::class.java.simpleName
+        )
+        transaction?.addToBackStack(FragRecoverPassWord::class.java.simpleName)
+        transaction?.commit()
     }
 
     private fun signUp() {
-       move(fragmentManager!!)
+        move(fragmentManager!!)
     }
 
     private fun signIn() {
@@ -75,8 +85,8 @@ class FragLogin : Fragment(),MoveTo {
 
 
     private fun getDataLogin(email: String, pass: String) {
-        mDataViewModel?.queryRepo(email, pass)
 
+        mDataViewModel?.queryRepoEmail(email, pass)
     }
 
     private fun init() {
@@ -85,15 +95,29 @@ class FragLogin : Fragment(),MoveTo {
 
         tvSignIn = rootView?.findViewById(R.id.tv_sign_in)
         tvSignUp = rootView?.findViewById(R.id.tv_sign_up)
+        tvForgotPass = rootView?.findViewById(R.id.tv_forgot_pass_word)
 
     }
 
     override fun move(manager: FragmentManager) {
         var transaction = manager.beginTransaction()
-        transaction.replace(R.id.frame_layout_activity,FragSignUp(),FragSignUp::class.java.simpleName)
+        transaction.replace(
+            R.id.frame_layout_activity,
+            FragSignUp(),
+            FragSignUp::class.java.simpleName
+        )
         transaction.addToBackStack(FragSignUp::class.java.simpleName)
         transaction.commit()
     }
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mDataViewModel = ViewModelProviders.of(this)
+            .get(LoginViewModel::class.java)
+        mDataViewModel?.getData()?.observe(this,
+            Observer<LoginInfo> { t ->
+                Toast.makeText(context, "${t?.message}", Toast.LENGTH_SHORT).show()
+            })
+    }
 }

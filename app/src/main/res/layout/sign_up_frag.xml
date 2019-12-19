@@ -34,7 +34,9 @@
             android:singleLine="true"
             android:paddingStart="50dp"
             android:gravity="center_vertical"
-            android:padding="20dp"/>
+            android:padding="20dp"
+            android:textCursorDrawable="@null"
+            android:theme="@style/AppTheme"/>
 
         <ImageView
             android:layout_width="24dp"
@@ -58,7 +60,9 @@
             android:hint="@string/all_ed_email"
             android:singleLine="true"
             android:paddingStart="50dp"
-            android:padding="20dp"/>
+            android:padding="20dp"
+            android:textCursorDrawable="@null"
+            android:theme="@style/AppTheme"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -79,10 +83,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:hint="@string/all_ed_phone_number"
-            android:singleLine="true"
-            android:paddingStart="50dp"
+            android:inputType="phone"
             android:padding="20dp"
-            android:inputType="phone"/>
+            android:paddingStart="50dp"
+            android:singleLine="true"
+            android:textCursorDrawable="@null"
+            android:theme="@style/AppTheme"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -106,7 +112,9 @@
             android:singleLine="true"
             android:paddingStart="50dp"
             android:padding="20dp"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:textCursorDrawable="@null"
+            android:theme="@style/AppTheme"/>
 
         <ImageView
             android:layout_width="24dp"

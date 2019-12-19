@@ -9,7 +9,7 @@ class SignUpViewModel : ViewModel() {
     private var repo: SignUpRepo? = SignUpRepo.getInstance()
 
     fun executeRegister():MutableLiveData<LoginInfo>?{
-        return SignUpRepo.mResult
+        return repo?.mResult
     }
 
     fun queryRepo(map:Map<String,String>){

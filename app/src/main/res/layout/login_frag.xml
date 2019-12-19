@@ -27,7 +27,9 @@
             android:layout_gravity="center_horizontal"
             android:hint="@string/all_ed_email"
             android:singleLine="true"
-            android:paddingStart="50dp"/>
+            android:paddingStart="50dp"
+            android:textCursorDrawable="@null"
+            android:theme="@style/AppTheme"/>
 
         <ImageView
             android:layout_width="24dp"
@@ -49,7 +51,9 @@
             android:layout_gravity="center_horizontal"
             android:hint="@string/all_ed_pass_word"
             android:inputType="textPassword"
-            android:paddingStart="50dp"/>
+            android:paddingStart="50dp"
+            android:textCursorDrawable="@null"
+            android:theme="@style/AppTheme"/>
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"

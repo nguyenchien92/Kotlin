@@ -10,4 +10,7 @@
     <string name="ed_full_name">Họ và tên</string>
     <string name="all_ed_phone_number">Số điện thoại</string>
     <string name="all_tv_rule">Bạn chưa đồng ý vói điều khoản sử dụng</string>
+    <string name="all_text_recover_pass_word">Lấy lại mật khẩu</string>
+    <string name="recover_pass_text_recover_mess">Vui lòng nhập địa chỉ email của
+        bạn và chúng tôi sẽ gửi bạn đường dẫn khôi phục mật khẩu vào email</string>
 </resources>

@@ -9,19 +9,24 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SignUpRepo private constructor() {
+
+    val mResult: MutableLiveData<LoginInfo> = MutableLiveData()
     companion object {
-        val mResult: MutableLiveData<LoginInfo> = MutableLiveData()
-        var signUpRepo: SignUpRepo? = null
+
+        private var signUpRepo: SignUpRepo? = null
 
         fun getInstance(): SignUpRepo? {
-            if (signUpRepo == null)
+            if (signUpRepo == null) {
                 signUpRepo = SignUpRepo()
+            }
 
             return signUpRepo
         }
     }
 
     fun checkSignUp(mapInfo: Map<String, String>) {
+
+        var map = mapInfo
 
         var client = ControllerApi.getClient().create(ApiService::class.java)
         var call = client.register(mapInfo)
@@ -35,7 +40,7 @@ class SignUpRepo private constructor() {
                 var code = response.code()
 
                 when (code) {
-                    EnumCode.ERROR.number -> errorData(response)
+                    EnumCode.ERROR.number -> errorRegister(response)
                     EnumCode.SUCCESS.number -> successData(response)
                 }
             }
@@ -43,13 +48,14 @@ class SignUpRepo private constructor() {
     }
 
     private fun successData(response: Response<LoginInfo>) {
-        mResult.value = response.body()
+        mResult?.value = response.body()
     }
 
-    private fun errorData(response: Response<LoginInfo>) {
+    private fun errorRegister(response: Response<LoginInfo>) {
         var gson = Gson()
+
         var result = gson.fromJson(response.errorBody()?.string(), LoginInfo::class.java)
 
-        mResult.value = result
+        mResult?.value = result
     }
 }

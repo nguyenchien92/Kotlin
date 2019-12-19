@@ -14,7 +14,12 @@ class LoginViewModel : ViewModel() {
         return LoginInfoRepo.loginData
     }
 
-    fun queryRepo(email: String, password: String) {
+    fun queryRepoEmail(email: String, password: String) {
         repo?.checkLogin(email, password)
     }
+
+    fun executedRecoverPass(email:String){
+        repo?.recoverPassWord(email)
+    }
+
 }
