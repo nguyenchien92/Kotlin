@@ -25,10 +25,9 @@ class FragLogin : Fragment(), MoveTo {
     private var edPass: EditText? = null
     private var tvSignIn: TextView? = null
     private var tvSignUp: TextView? = null
-    private var mDataViewModel: LoginViewModel? = null
     private var tvForgotPass: TextView? = null
     private var rootView: View? = null
-
+    private var mDataViewModel: LoginViewModel? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -72,15 +71,11 @@ class FragLogin : Fragment(), MoveTo {
     }
 
     private fun signIn() {
-        checkLogin()
-    }
-
-    private fun checkLogin() {
-
         var email = edMail?.text.toString()
         var pass = edPass?.text.toString()
 
         getDataLogin(email, pass)
+
     }
 
 
@@ -113,11 +108,26 @@ class FragLogin : Fragment(), MoveTo {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mDataViewModel = ViewModelProviders.of(this)
-            .get(LoginViewModel::class.java)
+
+        mDataViewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
+        mDataViewModel?.getData()?.removeObservers(this)
         mDataViewModel?.getData()?.observe(this,
             Observer<LoginInfo> { t ->
                 Toast.makeText(context, "${t?.message}", Toast.LENGTH_SHORT).show()
+
+                Log.d("TEST", "[onChanged]: " + hashCode())
             })
     }
+
+//    override fun onActivityCreated(savedInstanceState: Bundle?) {
+//        super.onActivityCreated(savedInstanceState)
+//        mDataViewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
+//        mDataViewModel?.getData()?.removeObservers(viewLifecycleOwner)
+//        mDataViewModel?.getData()?.observe(viewLifecycleOwner,
+//            Observer<LoginInfo> { t ->
+//                Toast.makeText(context, "${t?.message}", Toast.LENGTH_SHORT).show()
+//
+//                Log.d("TEST", "[onChanged]: " + hashCode())
+//            })
+//    }
 }

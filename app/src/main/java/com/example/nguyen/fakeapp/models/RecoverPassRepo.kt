@@ -8,27 +8,26 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SignUpRepo private constructor() {
-
+class RecoverPassRepo{
     val mResult: MutableLiveData<LoginInfo> = MutableLiveData()
     companion object {
 
-        private var signUpRepo: SignUpRepo? = null
+        private var recover: RecoverPassRepo? = null
 
-        fun getInstance(): SignUpRepo? {
-            if (signUpRepo == null) {
-                signUpRepo = SignUpRepo()
+        fun getInstance(): RecoverPassRepo? {
+            if (recover == null) {
+                recover = RecoverPassRepo()
             }
 
-            return signUpRepo
+            return recover
         }
     }
 
-    fun checkSignUp(mapInfo: Map<String, String>) {
+    fun recoverMail(mail:String) {
 
 
         var client = ControllerApi.getClient().create(ApiService::class.java)
-        var call = client.register(mapInfo)
+        var call = client.recoverPassWord(mail)
 
         call.enqueue(object : Callback<LoginInfo> {
             override fun onFailure(call: Call<LoginInfo>, t: Throwable) {

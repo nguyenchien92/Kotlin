@@ -100,13 +100,12 @@ class FragSignUp : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel = ViewModelProviders.of(this).get(SignUpViewModel::class.java)
+
         mViewModel?.executeRegister()?.observe(this,
             Observer<LoginInfo> { t ->
                 Toast.makeText(context, "${t?.message}", Toast.LENGTH_SHORT).show()
             })
     }
-
-
 }
 
 

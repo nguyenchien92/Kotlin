@@ -1,6 +1,7 @@
 package com.example.nguyen.fakeapp.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.example.nguyen.fakeapp.R
 import com.example.nguyen.fakeapp.models.LoginInfo
 import com.example.nguyen.fakeapp.models.LoginInfoRepo
 import com.example.nguyen.fakeapp.viewmodels.LoginViewModel
+import com.example.nguyen.fakeapp.viewmodels.RecoverPassViewModel
 import kotlinx.android.synthetic.main.recover_pass_frag.*
 
 class FragRecoverPassWord : Fragment() {
@@ -21,7 +23,7 @@ class FragRecoverPassWord : Fragment() {
     private var rootView: View? = null
     private var edRecoverMail: EditText? = null
     private var tvExecuteRecover: TextView? = null
-    private var mViewModel: LoginViewModel? = null
+    private var mViewModel: RecoverPassViewModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,9 +51,23 @@ class FragRecoverPassWord : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        mViewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
+        mViewModel = ViewModelProviders.of(this).get(RecoverPassViewModel::class.java)
+        mViewModel?.getData()?.removeObservers(this)
         mViewModel?.getData()?.observe(this,
-            Observer<LoginInfo> { t -> Toast.makeText(context, "${t?.message}", Toast.LENGTH_SHORT).show() })
+            Observer<LoginInfo> { t ->
+                Toast.makeText(context, "${t?.message}", Toast.LENGTH_SHORT).show()
+                Log.d("TEST2", "[onChanged]: " + hashCode())
+            })
     }
+
+//    override fun onActivityCreated(savedInstanceState: Bundle?) {
+//        super.onActivityCreated(savedInstanceState)
+//        mViewModel = ViewModelProviders.of(this).get(RecoverPassViewModel::class.java)
+//        mViewModel?.getData()?.removeObservers(viewLifecycleOwner)
+//        mViewModel?.getData()?.observe(viewLifecycleOwner,
+//            Observer<LoginInfo> { t ->
+//                Toast.makeText(context, "${t?.message}", Toast.LENGTH_SHORT).show()
+//                Log.d("TEST2", "[onChanged]: " + hashCode())
+//            })
+//    }
 }
