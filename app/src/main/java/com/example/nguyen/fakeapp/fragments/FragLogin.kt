@@ -1,6 +1,5 @@
 package com.example.nguyen.fakeapp.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +14,7 @@ import androidx.lifecycle.Observer
 import com.example.nguyen.fakeapp.R
 import com.example.nguyen.fakeapp.viewmodels.LoginViewModel
 import androidx.lifecycle.ViewModelProviders
+import com.example.nguyen.fakeapp.models.EnumCode
 import com.example.nguyen.fakeapp.models.LoginInfo
 import com.example.nguyen.fakeapp.utils.MoveTo
 
@@ -28,6 +28,8 @@ class FragLogin : Fragment(), MoveTo {
     private var tvForgotPass: TextView? = null
     private var rootView: View? = null
     private var mDataViewModel: LoginViewModel? = null
+    private var codeSuccess: Int? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -76,11 +78,17 @@ class FragLogin : Fragment(), MoveTo {
 
         getDataLogin(email, pass)
 
+//        if (EnumCode.STATUS.number == codeSuccess){
+//            var transaction = fragmentManager?.beginTransaction()
+//            transaction?.replace(R.id.frame_layout_activity
+//                ,FragContentMain(),FragContentMain::class.java.simpleName)
+//            transaction?.addToBackStack(FragContentMain::class.java.simpleName)
+//            transaction?.commit()
+//        }
     }
 
 
     private fun getDataLogin(email: String, pass: String) {
-
         mDataViewModel?.queryRepoEmail(email, pass)
     }
 
@@ -110,11 +118,10 @@ class FragLogin : Fragment(), MoveTo {
         super.onCreate(savedInstanceState)
 
         mDataViewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
-        mDataViewModel?.getData()?.removeObservers(this)
         mDataViewModel?.getData()?.observe(this,
             Observer<LoginInfo> { t ->
                 Toast.makeText(context, "${t?.message}", Toast.LENGTH_SHORT).show()
-
+                codeSuccess = t.status
                 Log.d("TEST", "[onChanged]: " + hashCode())
             })
     }
@@ -126,8 +133,16 @@ class FragLogin : Fragment(), MoveTo {
 //        mDataViewModel?.getData()?.observe(viewLifecycleOwner,
 //            Observer<LoginInfo> { t ->
 //                Toast.makeText(context, "${t?.message}", Toast.LENGTH_SHORT).show()
-//
+//                codeSuccess = t.status
 //                Log.d("TEST", "[onChanged]: " + hashCode())
 //            })
+//
 //    }
+
+    override fun onPause() {
+        super.onPause()
+        edMail?.setText("")
+        edPass?.setText("")
+    }
 }
+//Đang gặp vấn đề chuyển trang sau khi xét điều kiện...

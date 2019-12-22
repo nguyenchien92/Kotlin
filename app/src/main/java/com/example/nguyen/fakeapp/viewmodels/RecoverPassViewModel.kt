@@ -9,7 +9,7 @@ import com.example.nguyen.fakeapp.models.RecoverPassRepo
 class RecoverPassViewModel : ViewModel(){
     private var repo: RecoverPassRepo? = RecoverPassRepo.getInstance()
 
-    fun getData(): MutableLiveData<LoginInfo>? {
+    fun responseResult(): MutableLiveData<LoginInfo>? {
 
         return repo?.mResult
     }

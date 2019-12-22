@@ -8,18 +8,15 @@ import com.example.nguyen.fakeapp.models.LoginInfoRepo
 
 class LoginViewModel : ViewModel() {
     private var repo: LoginInfoRepo? = LoginInfoRepo.getInstance()
+    private var mResult: MutableLiveData<LoginInfo>? = null
 
     fun getData(): MutableLiveData<LoginInfo>? {
-
-        return LoginInfoRepo.loginData
+        mResult=  repo?.loginData
+        return mResult
     }
 
     fun queryRepoEmail(email: String, password: String) {
         repo?.checkLogin(email, password)
-    }
-
-    fun executedRecoverPass(email:String){
-        repo?.recoverPassWord(email)
     }
 
 }

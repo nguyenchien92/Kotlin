@@ -13,4 +13,9 @@
     <string name="all_text_recover_pass_word">Lấy lại mật khẩu</string>
     <string name="recover_pass_text_recover_mess">Vui lòng nhập địa chỉ email của
         bạn và chúng tôi sẽ gửi bạn đường dẫn khôi phục mật khẩu vào email</string>
+    <string name="text_home_bar">Trang chủ</string>
+    <string name="text_mess_bar">Tin nhắn</string>
+    <string name="text_sell_bar">Đăng bán</string>
+    <string name="text_search_bar">Tìm mua</string>
+    <string name="text_account_bar">Tài khoản</string>
 </resources>

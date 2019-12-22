@@ -13,10 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.nguyen.fakeapp.R
 import com.example.nguyen.fakeapp.models.LoginInfo
-import com.example.nguyen.fakeapp.models.LoginInfoRepo
-import com.example.nguyen.fakeapp.viewmodels.LoginViewModel
 import com.example.nguyen.fakeapp.viewmodels.RecoverPassViewModel
-import kotlinx.android.synthetic.main.recover_pass_frag.*
 
 class FragRecoverPassWord : Fragment() {
 
@@ -52,8 +49,7 @@ class FragRecoverPassWord : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel = ViewModelProviders.of(this).get(RecoverPassViewModel::class.java)
-        mViewModel?.getData()?.removeObservers(this)
-        mViewModel?.getData()?.observe(this,
+        mViewModel?.responseResult()?.observe(this,
             Observer<LoginInfo> { t ->
                 Toast.makeText(context, "${t?.message}", Toast.LENGTH_SHORT).show()
                 Log.d("TEST2", "[onChanged]: " + hashCode())
@@ -63,8 +59,8 @@ class FragRecoverPassWord : Fragment() {
 //    override fun onActivityCreated(savedInstanceState: Bundle?) {
 //        super.onActivityCreated(savedInstanceState)
 //        mViewModel = ViewModelProviders.of(this).get(RecoverPassViewModel::class.java)
-//        mViewModel?.getData()?.removeObservers(viewLifecycleOwner)
-//        mViewModel?.getData()?.observe(viewLifecycleOwner,
+//
+//        mViewModel?.responseResult()?.observe(viewLifecycleOwner,
 //            Observer<LoginInfo> { t ->
 //                Toast.makeText(context, "${t?.message}", Toast.LENGTH_SHORT).show()
 //                Log.d("TEST2", "[onChanged]: " + hashCode())

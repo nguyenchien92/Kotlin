@@ -19,10 +19,10 @@ class LoginInfoRepo private constructor() {
 
     //    var loginData: MutableLiveData<LoginInfo> = MutableLiveData()
     private var client: ApiService = ControllerApi.getClient().create(ApiService::class.java)
-
+    val loginData: MutableLiveData<LoginInfo> = MutableLiveData()
     companion object {
         var loginInstance: LoginInfoRepo? = null
-        val loginData: MutableLiveData<LoginInfo> = MutableLiveData()
+
         fun getInstance(): LoginInfoRepo? {
             if (loginInstance == null)
                 loginInstance = LoginInfoRepo()
@@ -62,26 +62,9 @@ class LoginInfoRepo private constructor() {
 
     private fun resultData(response: Response<LoginInfo>) {
         loginData?.value = response.body()
+
     }
 
-    fun recoverPassWord(email:String)
-    {
-        var call = client.recoverPassWord(email)
-
-        call.enqueue(object: Callback<LoginInfo>{
-            override fun onFailure(call: Call<LoginInfo>, t: Throwable) {
-                Log.d("Fail", "${t.localizedMessage}")
-            }
-
-            override fun onResponse(call: Call<LoginInfo>, response: Response<LoginInfo>) {
-                var code = response.code()
-                when (code) {
-                    EnumCode.ERROR.number -> errorData(response)
-                    EnumCode.SUCCESS.number -> resultData(response)
-                }
-            }
-        })
-    }
 }
 
 

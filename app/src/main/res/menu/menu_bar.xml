@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_message"
+        android:checked="true"
+        android:icon="@drawable/all_icon_home"
+        android:title="@string/text_home_bar" />
+    <item
+        android:id="@+id/action_contact"
+        android:checked="true"
+        android:icon="@drawable/all_icon_mess"
+        android:title="@string/text_mess_bar" />
+    <item
+        android:id="@+id/action_more"
+        android:checked="true"
+        android:icon="@drawable/all_icon_sell"
+        android:title="@string/text_sell_bar" />
+    <item
+        android:id="@+id/action_create_group"
+        android:checked="true"
+        android:icon="@drawable/all_icon_search"
+        android:title="@string/text_search_bar" />
+    <item
+        android:id="@+id/action_new_group_conversation"
+        android:checked="true"
+        android:icon="@drawable/frag_login_icon_email"
+        android:title="@string/text_account_bar" />
+</menu>
